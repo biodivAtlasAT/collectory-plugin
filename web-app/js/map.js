@@ -307,6 +307,9 @@ function updateList(features) {
             content += "<li><span class='highlight'>" + jQuery.i18n.prop('dataproviders.list') + "</span><ul>";
 
         } else {
+            if(firstColl.attributes.instUid == undefined) // e.g. for institutions without collections and no general dataproviders
+                content += "<li>"+ jQuery.i18n.prop('dataproviders.list') + "<ul>";
+                else
             content += "<li><a class='highlight' href='" + baseUrl + "/public/show/" + firstColl.attributes.instUid + "'>" +
                     firstColl.attributes.instName + "</a><ul>";
         }

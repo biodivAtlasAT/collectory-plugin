@@ -15,7 +15,7 @@
           </g:if>
           <div class="hrgroup">
             <h1><g:message code="public.map3.header.title" args="[raw(grailsApplication.config.regionName)]"/></h1>
-            <p><g:message code="public.map3.header.des01" /> ${grailsApplication.config.projectNameShort} <g:message code="public.map3.header.des02" args="[raw(grailsApplication.config.regionName)]"/>.</p>
+            <p><g:message code="public.map3.header.des01" /> ${grailsApplication.config.projectNameShort} <g:message code="public.map3.header.des02" args="[raw(grailsApplication.config.regionName)]"/></p>
           </div><!--close hrgroup-->
         </div><!--close section-->
       </div><!--close header-->
@@ -97,6 +97,7 @@
       </div><!--close map/list div-->
     </div><!--close content-->
     </div>
+    <!-- <g:message code="i18n.checkcode" /> -->
   </body>
   <r:script>
       var altMap = true;

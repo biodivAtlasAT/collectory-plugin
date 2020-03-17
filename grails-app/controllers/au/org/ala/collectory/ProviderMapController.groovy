@@ -123,17 +123,19 @@ class ProviderMapController {
     def delete = {
         def providerMapInstance = ProviderMap.get(params.id)
         if (providerMapInstance) {
-            if (providerMapInstance.collection.uid) {
+            if (providerMapInstance.collection?.uid != null || providerMapInstance.collection == null) {
                 try {
                     // remove collection link
                     providerMapInstance.collection?.providerMap = null
                     // remove code links
-                    providerMapInstance.collectionCodes.each {
+                    providerMapInstance.collectionCodes.clear();
+                    providerMapInstance.institutionCodes.clear();
+                    /*providerMapInstance.collectionCodes.each {
                         providerMapInstance.removeFromCollectionCodes it
                     }
                     providerMapInstance.institutionCodes.each {
                         providerMapInstance.removeFromInstitutionCodes it
-                    }
+                    }*/
                     // remove map
                     providerMapInstance.delete(flush: true)
                     flash.message = "${message(code: 'default.deleted.message', args: [message(code: 'providerMap.label', default: 'ProviderMap'), params.id])}"
@@ -143,7 +145,9 @@ class ProviderMapController {
                     flash.message = "${message(code: 'default.not.deleted.message', args: [message(code: 'providerMap.label', default: 'ProviderMap'), params.id])}"
                     redirect(action: "show", id: params.id, params:[returnTo: params.returnTo])
                 }
-            } else {
+            }
+
+            else {
                 render "You are not authorised to access this page."
             }
         }

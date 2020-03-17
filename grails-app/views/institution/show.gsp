@@ -100,6 +100,9 @@
                 <!-- Institution type -->
                 <p><span class="category"><g:message code="institution.edit.span07" />:</span> ${fieldValue(bean: instance, field: "institutionType")}</p>
 
+                <!-- Keywords -->
+                <p><span class="category"><g:message code="dataprovider.show.span07" />:</span> ${fieldValue(bean: instance, field: "keywords")}</p>
+
                 <!-- Collections -->
                 <h2>Collections</h2>
                 <ul class='fancy'>

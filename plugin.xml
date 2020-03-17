@@ -1,0 +1,82 @@
+<plugin name='collectory' version='1.9.9-SNAPSHOT_DUK' grailsVersion='2.5 &gt; *'>
+  <author>Alan Lin</author>
+  <authorEmail>alan.lin@csiro.au</authorEmail>
+  <title>Collectory Plugin</title>
+  <description>A Grails plugin to provide the core functionality for collection and displaying biodiversity data from
+collectory web services. Data access is via JSON REST web services
+from the ALA collectory app (no local DB is required for this app).
+</description>
+  <documentation>https://github.com/AtlasOfLivingAustralia/collectory-plugin</documentation>
+  <type>CollectoryGrailsPlugin</type>
+  <resources>
+    <resource>CollectoryBootStrap</resource>
+    <resource>CollectoryResources</resource>
+    <resource>CollectoryUrlMappings</resource>
+    <resource>defaultConfig</resource>
+    <resource>spring.resources</resource>
+    <resource>au.org.ala.collectory.AdminController</resource>
+    <resource>au.org.ala.collectory.CollectionController</resource>
+    <resource>au.org.ala.collectory.ContactController</resource>
+    <resource>au.org.ala.collectory.DataController</resource>
+    <resource>au.org.ala.collectory.DataFeedsController</resource>
+    <resource>au.org.ala.collectory.DataHubController</resource>
+    <resource>au.org.ala.collectory.DataLinkController</resource>
+    <resource>au.org.ala.collectory.DataProviderController</resource>
+    <resource>au.org.ala.collectory.DataResourceController</resource>
+    <resource>au.org.ala.collectory.EntityController</resource>
+    <resource>au.org.ala.collectory.GbifController</resource>
+    <resource>au.org.ala.collectory.InstitutionController</resource>
+    <resource>au.org.ala.collectory.IptController</resource>
+    <resource>au.org.ala.collectory.LicenceController</resource>
+    <resource>au.org.ala.collectory.LookupController</resource>
+    <resource>au.org.ala.collectory.ManageController</resource>
+    <resource>au.org.ala.collectory.MessagesController</resource>
+    <resource>au.org.ala.collectory.ProviderCodeController</resource>
+    <resource>au.org.ala.collectory.ProviderGroupController</resource>
+    <resource>au.org.ala.collectory.ProviderMapController</resource>
+    <resource>au.org.ala.collectory.PublicController</resource>
+    <resource>au.org.ala.collectory.ReportsController</resource>
+    <resource>au.org.ala.collectory.TempDataResourceController</resource>
+    <resource>au.org.ala.audit.AuditLogEvent</resource>
+    <resource>au.org.ala.collectory.ActivityLog</resource>
+    <resource>au.org.ala.collectory.Address</resource>
+    <resource>au.org.ala.collectory.Attribution</resource>
+    <resource>au.org.ala.collectory.Collection</resource>
+    <resource>au.org.ala.collectory.Contact</resource>
+    <resource>au.org.ala.collectory.ContactFor</resource>
+    <resource>au.org.ala.collectory.DataHub</resource>
+    <resource>au.org.ala.collectory.DataLink</resource>
+    <resource>au.org.ala.collectory.DataProvider</resource>
+    <resource>au.org.ala.collectory.DataResource</resource>
+    <resource>au.org.ala.collectory.DataSourceConfiguration</resource>
+    <resource>au.org.ala.collectory.ExternalIdentifier</resource>
+    <resource>au.org.ala.collectory.ExternalResourceBean</resource>
+    <resource>au.org.ala.collectory.Image</resource>
+    <resource>au.org.ala.collectory.Institution</resource>
+    <resource>au.org.ala.collectory.Licence</resource>
+    <resource>au.org.ala.collectory.ProviderCode</resource>
+    <resource>au.org.ala.collectory.ProviderMap</resource>
+    <resource>au.org.ala.collectory.Sequence</resource>
+    <resource>au.org.ala.collectory.TempDataResource</resource>
+    <resource>au.org.ala.collectory.CollectoryAuthService</resource>
+    <resource>au.org.ala.collectory.CrudService</resource>
+    <resource>au.org.ala.collectory.DataImportService</resource>
+    <resource>au.org.ala.collectory.DataLoaderService</resource>
+    <resource>au.org.ala.collectory.EmlImportService</resource>
+    <resource>au.org.ala.collectory.EmlRenderService</resource>
+    <resource>au.org.ala.collectory.ExternalDataService</resource>
+    <resource>au.org.ala.collectory.GbifRegistryService</resource>
+    <resource>au.org.ala.collectory.GbifService</resource>
+    <resource>au.org.ala.collectory.IdGeneratorService</resource>
+    <resource>au.org.ala.collectory.InstitutionCodeLoaderService</resource>
+    <resource>au.org.ala.collectory.IptService</resource>
+    <resource>au.org.ala.collectory.IsoCodeService</resource>
+    <resource>au.org.ala.collectory.MessageSourceCacheService</resource>
+    <resource>au.org.ala.collectory.MetadataService</resource>
+    <resource>au.org.ala.collectory.RifCsService</resource>
+    <resource>au.org.ala.collectory.CitationsTagLib</resource>
+    <resource>au.org.ala.collectory.CollectoryTagLib</resource>
+    <resource>au.org.ala.collectory.SkinningTagLib</resource>
+    <resource>au.org.ala.collectory.TwitterBootstrapTagLib</resource>
+  </resources>
+</plugin>

@@ -45,6 +45,12 @@
                     <g:select name="institutionType" class="form-control" from="${Institution.constraints.institutionType.inList}" value="${command.institutionType}"/>
                 </div>
 
+                <!-- keywords -->
+                <div class="form-group">
+                    <label for="keywords"><g:message code="providerGroup.keywords.label" default="Keywords" /></label>
+                    <g:textField name="keywords" maxlength="255" value="${command.keywords?:'Not provided'}" />
+                </div>
+
                 <div class="buttons">
                     <span class="button"><input type="submit" name="_action_updateDescription" value="${message(code:"collection.button.update")}" class="save btn btn-success"></span>
                     <span class="button"><input type="submit" name="_action_cancel" value="${message(code:"collection.button.cancel")}" class="cancel btn btn-default"></span>

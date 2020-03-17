@@ -690,6 +690,35 @@ class PublicController {
             }
         }
 
+        Institution.list([sort:"name"]).each {
+            // only show ALA partners
+            if (it.isALAPartner) {
+                // make 0 values be -1
+                def lat = (it.latitude == 0.0) ? -1 : it.latitude
+                def lon = (it.longitude == 0.0) ? -1 : it.longitude
+                // show if matches current filter
+                if (showAll || Classification.matchKeywords(it.keywords, params.filters)) {
+                    //if (it.children().size() == 0) {
+                    if (it.getLinkedDataResources()?.size() == 0) {
+                        def loc = [type: "Feature"]
+                        loc.properties = [
+                                name      : it.name,
+                                entityType: it.ENTITY_TYPE,
+                                acronym   : it.acronym,
+                                uid       : it.uid,
+                                isMappable: it.canBeMapped(),
+                                address   : it.address?.buildAddress(),
+                                desc      : it.makeAbstract(),
+                                //dataResourceCount: it.resources.size(),
+                                url       : request.getContextPath() + "/public/show/" + it.uid]
+                        loc.geometry = [type: "Point", coordinates: [lon, lat]]
+                        locations.features << loc
+                    }
+                }
+            }
+        }
+
+
         render( locations as JSON )
     }
 
