@@ -699,7 +699,8 @@ class PublicController {
                 // show if matches current filter
                 if (showAll || Classification.matchKeywords(it.keywords, params.filters)) {
                     //if (it.children().size() == 0) {
-                    if (it.getLinkedDataResources()?.size() == 0) {
+                    //if (it.getLinkedDataResources()?.size() == 0 ) {
+                    if (it.getLinkedDataResources()?.size() == 0 || (it.listProviders()?.size() != 0 && it.listCollections()?.size() == 0)) {
                         def loc = [type: "Feature"]
                         loc.properties = [
                                 name      : it.name,

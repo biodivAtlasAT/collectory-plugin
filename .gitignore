@@ -3,3 +3,5 @@ target/*
 .idea/*
 .slcache/
 /classes/
+/grails-collectory-1.9.9-SNAPSHOT_DUK.zip
+/grails-collectory-1.9.9-SNAPSHOT_DUK.zip.sha1
