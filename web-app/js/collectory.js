@@ -225,7 +225,7 @@ function loadDownloadStats(loggerServicesUrl, uid, name, eventType) {
                 var $usageDiv = $('<div class="usageDiv well"/>');
                 var nonTestingRecords  = (value.reasonBreakdown["testing"] == undefined) ? value.records : value.records -  value.reasonBreakdown["testing"].records;
                 var nonTestingEvents   = (value.reasonBreakdown["testing"] == undefined) ? value.events  : value.events  -  value.reasonBreakdown["testing"].events;
-                $usageDiv.html('<h4><span>' + displayString + "</span><span class='pull-right'>" + addCommas(nonTestingRecords) + " " + jQuery.i18n.prop('collectory.js.recordsdownloaded') + " " +  addCommas(nonTestingEvents) + " downloads. </span></h4>");
+                $usageDiv.html('<h4><span>' + displayString + "</span><span class='pull-right'>" + addCommas(nonTestingRecords) + " " + jQuery.i18n.prop('collectory.js.recordsdownloaded') + " " +  addCommas(nonTestingEvents) + " "+jQuery.i18n.prop('collectory.js.recordsdownloaded.download') +" </span></h4>");
                 var $usageTable = $('<table class="table"/>');
                 reasons = sortKV(value['reasonBreakdown']);
                 $.each(reasons, function( index, details ) {
@@ -233,11 +233,13 @@ function loadDownloadStats(loggerServicesUrl, uid, name, eventType) {
                     if (details.key.indexOf("test") >=0){
                         usageTableRow += " style=color:#999999;";
                     }
-                    usageTableRow += '><td>' + capitalise(details.key) ;
+                    var dk = details.key.replace(" ", ".").replace("/",".").replace(" ", ".");
+                    //usageTableRow += '><td>' + capitalise(details.key) ;
+                    usageTableRow += '><td>' + capitalise(jQuery.i18n.prop('collectory.js.download.reasons.'+dk)) ;
                     if (details.key.indexOf("test") >=0){
                         usageTableRow += "<br/><span style='font-size: 12px;'> *" + jQuery.i18n.prop('collectory.js.testingstatistics') + "</span>";
                     }
-                    usageTableRow += '</td><td style="text-align: right;">' + addCommas(details.value.events) + ' events</td><td style="text-align: right">'  + addCommas(details.value.records)  + ' records </td></tr>';
+                    usageTableRow += '</td><td style="text-align: right;">' + addCommas(details.value.events) + ' '+jQuery.i18n.prop('collectory.js.download.reasons.events')+'</td><td style="text-align: right">'  + addCommas(details.value.records)  + ' '+jQuery.i18n.prop('collectory.js.download.reasons.records')+' </td></tr>';
                     $usageTable.append($(usageTableRow));
                 });
                 $usageDiv.append($usageTable);

@@ -91,23 +91,17 @@
                 <g:else>
                     <p><g:message code="public.sdp.content.noresources"/></p>
                 </g:else>
-
+                <div id="charts"> </div>
                 <g:if test="${hasRecords == 'true'}">
                     <div id='usage-stats'>
                         <h2><g:message code="public.sdp.usagestats.label" /></h2>
                         <div id='usage'>
                             <p><g:message code="public.usage.des" />...</p>
                         </div>
-
-
-
-
-
                     </div>
                 </g:if>
 
 
-                <div id="charts"> </div>
                 <cl:lastUpdated date="${instance.lastUpdated}"/>
 
             </div><!--close section-->

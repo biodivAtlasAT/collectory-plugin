@@ -265,7 +265,7 @@
                           <span id="numBiocacheRecords"><g:message code="public.show.rt.des04" /></span>
                           <g:message code="public.show.rt.des05" args="[orgNameLong]"/>
                           <cl:warnIfInexactMapping collection="${instance}"/>
-                          <cl:recordsLink entity="${instance}"><g:message code="public.show.rt.des06" /> <cl:collectionName name="${instance.name}"/></cl:recordsLink>
+                          <cl:recordsLink entity="${instance}"><br><g:message code="public.show.rt.des06" /> <cl:collectionName name="${instance.name}"/></cl:recordsLink>
                       </p>
                     </g:if>
                     <g:else>
