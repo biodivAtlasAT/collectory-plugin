@@ -292,7 +292,7 @@ function updateList(features) {
     $('span#numFilteredCollections').html(innerFeatures);
 
     // group by institution
-    var sortedParents = groupByParent(features, true);
+    var sortedParents = groupByParentDUK(features, true);
 
     var innerHtml = "";
     var orphansHtml = "";
@@ -300,18 +300,20 @@ function updateList(features) {
         var collList = sortedParents[i];
         // show institution - use name of institution from first collection
         var firstColl = collList[0];
+        if(collList[0] == undefined || collList[0] == null)
+            firstColl = collList;
         var content = "";
         if (firstColl.attributes.instName == null && firstColl.attributes.entityType == "Collection") {
             content += "<li><span class='highlight'>" + jQuery.i18n.prop('collections.with.no.institution') + "</span><ul>";
-        } else if (firstColl.attributes.instName == null && firstColl.attributes.entityType == "DataProvider") {
-            content += "<li><span class='highlight'>" + jQuery.i18n.prop('dataproviders.list') + "</span><ul>";
-
         } else {
-            if(firstColl.attributes.instUid == undefined) // e.g. for institutions without collections and no general dataproviders
-                content += "<li>"+ jQuery.i18n.prop('dataproviders.list') + "<ul>";
-                else
-            content += "<li><a class='highlight' href='" + baseUrl + "/public/show/" + firstColl.attributes.instUid + "'>" +
+            if(firstColl.attributes.instName != null) {
+                content += "<li><a class='highlight' href='" + baseUrl + "/public/show/" + firstColl.attributes.instUid + "'>" +
                     firstColl.attributes.instName + "</a><ul>";
+            }
+            else {
+                content += "<li><a class='highlight' href='" + baseUrl + "/public/show/" + firstColl.attributes.uid + "'>" +
+                    firstColl.attributes.name + "</a><ul>";
+            }
         }
         // show each collection
         for (var c = 0; c < collList.length; c++) {
@@ -329,7 +331,7 @@ function updateList(features) {
             content += "</li>";
         }
         content += "</ul></li>"
-        if (firstColl.attributes.instName == null) {
+        if (firstColl.attributes.instName == null && firstColl.attributes.name == null) {
             orphansHtml = content;
         } else {
             innerHtml += content;
@@ -567,6 +569,58 @@ function groupByParent(features, groupOrphans) {
     });
     return sortedParents;
 }
+
+function groupByParentDUK(features, groupOrphans) {
+    // build 'map' of institutions and orphan collections
+    var parents = {};
+    for(var c = 0; c < features.length; c++) {
+        var collectionFeature = features[c];
+        var instUid = collectionFeature.attributes.instUid;
+        /*if (instUid == undefined && groupOrphans) {
+            //instUid = 'zz-other';
+            instUid = collectionFeature.attributes.uid;
+        }*/
+        if (instUid == undefined) {
+            // add as orphan collection
+            parents[collectionFeature.attributes.uid] = collectionFeature;
+        } else {
+            var collList = parents[instUid];
+            if (collList == undefined) {
+                // create new inst entry
+                collList = new Array();
+                collList.push(collectionFeature);
+                parents[instUid] = collList;
+            } else {
+                // add to existing inst entry
+                collList.push(collectionFeature);
+            }
+        }
+    }
+    // move to an array so we can sort
+    var sortedParents = [];
+    console.log("----------------------");
+    for (var key in parents) {
+        console.log(key);
+        sortedParents.push(parents[key]);
+    }
+    // sort
+    sortedParents.sort(function(a,b) {
+        var aname = getName(a).toUpperCase();
+        var bname = getName(b).toUpperCase();
+        return aname.localeCompare(bname);
+
+    });
+
+    console.log("======================");
+    var i;
+    for (i = 0; i < sortedParents.length; i++) {
+        console.log(sortedParents[i]);
+    }
+    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    return sortedParents;
+}
+
+
 
 /************************************************************\
 *   generate html for a clustered feature

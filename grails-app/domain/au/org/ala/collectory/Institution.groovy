@@ -76,7 +76,7 @@ class Institution extends ProviderGroup {
      * NOTE: restriction on abstract methods
      */
     boolean isALAPartner() {
-        if (networkMembership != null && networkMembership != "[]") {
+        if (networkMembership != null && networkMembership != "[]" && networkMembership.toString() != "") {
             return true
         } else {
             return this.isALAPartner

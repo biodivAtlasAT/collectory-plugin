@@ -302,7 +302,7 @@ class Collection extends ProviderGroup implements Serializable {
     boolean isALAPartner() {
         if (institution?.isALAPartner()) {
             return true
-        } else if (networkMembership != null && networkMembership != "[]") {
+        } else if (networkMembership != null && networkMembership != "[]"  && networkMembership.toString() != "") {
             return true
         } else {
             return this.isALAPartner
