@@ -109,10 +109,18 @@ function initMap(mapOptions) {
     }, {
         context: {
             pin: function(feature) {
-                return (feature.cluster) ? clusterGraphicUrl : featureGraphicUrl;
+                var collectionExists = false;
+                if(!feature.cluster)
+                    if (feature.attributes.entityType == "Collection")
+                        collectionExists = true;
+                if(feature.cluster || collectionExists) {
+                    return clusterGraphicUrl;
+                }
+                else
+                    return featureGraphicUrl;
             },
             size: function(feature) {
-                return (feature.cluster) ? 25 : 23;
+                return (feature.cluster) ? 24 : 24;
             }
         }
     });
@@ -218,14 +226,10 @@ function dataRequestHandler(data) {
     }
     var innerFeatures = "";
 
-    //console.log('Console: ' + jQuery.i18n.prop('map.js.nocollectionsareselected'));
-
-    switch (features.length) {
-        //case 0: innerFeatures = "No collections are selected."; break;
-        //case 1: innerFeatures = "One collection is selected."; break;
+    switch (countPartner(features)) {
         case 0: innerFeatures = jQuery.i18n.prop('map.js.nocollectionsareselected'); break;
         case 1: innerFeatures = jQuery.i18n.prop('map.js.onecollectionisselected'); break;
-        default: innerFeatures = features.length + " "+ selectedFrom + "."; break;
+        default: innerFeatures = countPartner(features) + " "+ selectedFrom + "."; break;
     }
     $('span#numFeatures').html(innerFeatures);
 
@@ -275,19 +279,16 @@ function getSelectedFiltersAsString() {
 \************************************************************/
 function updateList(features) {
     // update the potential total
-    maxCollections = Math.max(features.length, maxCollections);
+    maxCollections = Math.max(countPartner(features), maxCollections);
     if (!$('div#all').hasClass('inst')) {  // don't change text if showing institutions
         $('span#allButtonTotal').html(jQuery.i18n.prop('show.all') + " " + maxCollections + " " + jQuery.i18n.prop('collections') + ".")
     }
     // update display of number of features
     var innerFeatures = "";
-    switch (features.length) {
-        //case 0: innerFeatures = "No collections are selected"; break;
-        //case 1: innerFeatures = features.length + " collection is listed"; break;
-        //default: innerFeatures = features.length + " collections are listed alphabetically"; break;
+    switch (countPartner(features)) {
         case 0: innerFeatures = jQuery.i18n.prop('map.js.nocollectionsareselected'); break;
         case 1: innerFeatures = features.length + " " + jQuery.i18n.prop('map.js.collectionislisted'); break;
-        default: innerFeatures = features.length + " " + jQuery.i18n.prop('map.js.collectionsarelistedalphabetically'); break;
+        default: innerFeatures = countPartner(features) + " " + jQuery.i18n.prop('map.js.collectionsarelistedalphabetically'); break;
     }
     $('span#numFilteredCollections').html(innerFeatures);
 
@@ -390,19 +391,37 @@ function moved(evt) {
     // determine how many individual features are visible
     var visibleCount = 0;
     var totalCount = 0;
+    var alreadyCountedInstitutions = new Array();
     for (var c = 0; c < vectors.features.length; c++) {
         var f = vectors.features[c];
         if (f.cluster) {
-            totalCount += f.cluster.length;
-            // for clusters count each feature
+            var incr = 0;
+            for(var i = 0; i <f.cluster.length; i++ ) {
+                if(f.cluster[i].attributes.entityType == "Collection") {
+                    if (!alreadyCountedInstitutions.includes(f.cluster[i].attributes.instUid)) {
+                        alreadyCountedInstitutions.push(f.cluster[i].attributes.instUid);
+                        incr += 2;
+                    }
+                }
+                else
+                    incr++;
+            }
+            totalCount += incr;
             if (f.onScreen(true)) {
-                visibleCount += f.cluster.length;
+                visibleCount += incr;
             }
         } else {
-            totalCount++;
+            var incr = 1;
+            if(f.attributes.entityType == "Collection") {
+                if (!alreadyCountedInstitutions.includes(f.attributes.instUid)) {
+                    alreadyCountedInstitutions.push(f.attributes.instUid);
+                    incr++;
+                }
+            }
+            totalCount += incr;
             // single feature
             if (f.onScreen(true)) {
-                visibleCount++;
+                visibleCount += incr;
             }
         }
     }
@@ -570,6 +589,28 @@ function groupByParent(features, groupOrphans) {
     return sortedParents;
 }
 
+function countPartner(features) {
+    var count = 0;
+    var alreadyCountedInstitutions = new Array();
+    for(var c = 0; c < features.length; c++) {
+        var collectionFeature = features[c];
+        var instUid = collectionFeature.attributes.instUid;
+        if (instUid == undefined) {
+            count++;
+        }
+        else {
+            if (!alreadyCountedInstitutions.includes(instUid)) {
+                alreadyCountedInstitutions.push(instUid);
+                count += 2;
+            }
+            else {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
 function groupByParentDUK(features, groupOrphans) {
     // build 'map' of institutions and orphan collections
     var parents = {};
@@ -598,9 +639,7 @@ function groupByParentDUK(features, groupOrphans) {
     }
     // move to an array so we can sort
     var sortedParents = [];
-    console.log("----------------------");
     for (var key in parents) {
-        console.log(key);
         sortedParents.push(parents[key]);
     }
     // sort
@@ -611,12 +650,6 @@ function groupByParentDUK(features, groupOrphans) {
 
     });
 
-    console.log("======================");
-    var i;
-    for (i = 0; i < sortedParents.length; i++) {
-        console.log(sortedParents[i]);
-    }
-    console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     return sortedParents;
 }
 

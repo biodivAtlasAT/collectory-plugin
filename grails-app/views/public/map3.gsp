@@ -41,6 +41,9 @@
             <div class="plants" id="plants" onclick="toggleButton(this);return false;">
               <h2><a href=""><g:message code="public.map3.link.plants" /><span><g:message code="public.map3.link.vascular" />.</span></a></h2>
             </div>
+            <div class="fungi" id="fungi" onclick="toggleButton(this);return false;">
+                <h2><a href=""><g:message code="public.map3.link.fungi" /><span><g:message code="public.map3.link.fungi" />.</span></a></h2>
+            </div>
           </div><!--close section-->
           <div id="collectionTypesFooter">
             <h4 class="collectionsCount"><span id='numFeatures'></span></h4>
@@ -58,7 +61,7 @@
 
         <div class="col-md-8" id="map-list-col">
             <div class="tabbable">
-                <ul class="nav nav-tabs" id="home-tabs">
+                <ul class="nav nav-tabs" id="home-tabs" style="margin-left:0px">
                     <li class="active"><a href="#map" data-toggle="tab"><g:message code="public.map3.maplistcol.map" /></a></li>
                     <li><a href="#list" data-toggle="tab"><g:message code="public.map3.maplistcol.list" /></a></li>
                 </ul>
