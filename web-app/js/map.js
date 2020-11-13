@@ -222,7 +222,8 @@ function dataRequestHandler(data) {
     var selectedFilters = getSelectedFiltersAsString();
     var selectedFrom = jQuery.i18n.prop('map.js.collectionstotal');
     if (selectedFilters != 'all') {
-        selectedFrom = jQuery.i18n.prop(selectedFilters)/*selectedFilters*/ + " " + jQuery.i18n.prop('collections');
+        //selectedFrom = jQuery.i18n.prop(selectedFilters)/*selectedFilters*/ + " " + jQuery.i18n.prop('collections');
+        selectedFrom = jQuery.i18n.prop('collections') + " " +jQuery.i18n.prop(selectedFilters);
     }
     var innerFeatures = "";
 

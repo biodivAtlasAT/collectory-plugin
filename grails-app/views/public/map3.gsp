@@ -42,7 +42,7 @@
               <h2><a href=""><g:message code="public.map3.link.plants" /><span><g:message code="public.map3.link.vascular" />.</span></a></h2>
             </div>
             <div class="fungi" id="fungi" onclick="toggleButton(this);return false;">
-                <h2><a href=""><g:message code="public.map3.link.fungi" /><span><g:message code="public.map3.link.fungi" />.</span></a></h2>
+                <h2><a href=""><g:message code="public.map3.link.fungi" /><span><g:message code="public.map3.link.fungi2" />.</span></a></h2>
             </div>
           </div><!--close section-->
           <div id="collectionTypesFooter">
