@@ -44,6 +44,9 @@
             <g:set var="dp" value="${instance.dataProvider}"/>
             <g:if test="${dp}">
                 <h2 class="dataResourceProviderLink"><g:link action="show" id="${dp.uid}">${dp.name}</g:link></h2>
+                <g:if test="${instance.resourceType == 'records'}">
+                    <g:render template="/shared/consumersList" model="[instance: instance]"/>
+                </g:if>
             </g:if>
             <g:if test="${instance.institution}">
                 <h2 class="dataResourceInstitutionLink"><g:link action="show" id="${instance.institution.uid}">${instance.institution.name}</g:link></h2>
