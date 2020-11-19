@@ -608,6 +608,16 @@ abstract class ProviderGroup implements Serializable {
         DataLink.findAllByProvider(this.uid).collect {it.consumer}
     }
 
+    def List<String> listConsumersSorted() {
+        def map = [:]
+        DataLink.findAllByProvider(this.uid).collect {it.consumer}.each {
+            map[ProviderGroup._get(it).name.toString().toUpperCase()] = it
+        }
+        def newMap = map.sort{it.key}
+        newMap.collect{entry -> entry.value}
+    }
+
+
     /**
      * Returns taxonomy hints as a list of maps where each contains a rank and a name.
      *

@@ -45,7 +45,9 @@
             <g:if test="${dp}">
                 <h2 class="dataResourceProviderLink"><g:link action="show" id="${dp.uid}">${dp.name}</g:link></h2>
                 <g:if test="${instance.resourceType == 'records'}">
-                    <g:render template="/shared/consumersList" model="[instance: instance]"/>
+                    <g:if test="${instance.listConsumersSorted().size() > 0}">
+                        <g:render template="/shared/consumersList" model="[instance: instance]"/>
+                    </g:if>
                 </g:if>
             </g:if>
             <g:if test="${instance.institution}">
@@ -353,6 +355,6 @@
   }
 </r:script>
 <g:render template="taxonTree" model="[facet:'data_resource_uid', instance: instance]" />
-<g:render template="charts" model="[facet:'data_resource_uid', instance: instance]" />
+
 </body>
 </html>

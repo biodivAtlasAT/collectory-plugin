@@ -1,8 +1,8 @@
 <%@ page import="au.org.ala.collectory.ProviderGroup" %>
 <div class="show-section  well">
-  <h3>${instance.dataProvider.name}: <g:message code="shared.consumersList.title01" /></h3>
+  <h3><g:message code="shared.consumersList.title01" /></h3>
   <ul class="fancy">
-    <g:each in="${instance.listConsumers()}" var="con">
+    <g:each in="${instance.listConsumersSorted()}" var="con">
       <g:set var="pg" value="${ProviderGroup._get(con)}"/>
       <g:if test="${pg}">
         <li><a href="${con}">${pg.name} </a>
