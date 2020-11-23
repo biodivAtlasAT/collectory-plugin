@@ -142,11 +142,9 @@
                             <cl:valueOrOtherwise
                                     value="${instance.address?.street}">${instance.address?.street}<br/></cl:valueOrOtherwise>
                             <cl:valueOrOtherwise
+                                    value="${instance.address?.postcode}">${instance.address?.postcode}</cl:valueOrOtherwise>
+                            <cl:valueOrOtherwise
                                     value="${instance.address?.city}">${instance.address?.city}<br/></cl:valueOrOtherwise>
-                            <cl:valueOrOtherwise
-                                    value="${instance.address?.state}">${instance.address?.state}</cl:valueOrOtherwise>
-                            <cl:valueOrOtherwise
-                                    value="${instance.address?.postcode}">${instance.address?.postcode}<br/></cl:valueOrOtherwise>
                             <cl:valueOrOtherwise
                                     value="${instance.address?.country}">${instance.address?.country}<br/></cl:valueOrOtherwise>
                         </p>

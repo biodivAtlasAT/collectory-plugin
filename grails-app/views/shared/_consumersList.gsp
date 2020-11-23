@@ -5,7 +5,7 @@
     <g:each in="${instance.listConsumersSorted()}" var="con">
       <g:set var="pg" value="${ProviderGroup._get(con)}"/>
       <g:if test="${pg}">
-        <li><a href="${con}">${pg.name} </a>
+        <li><g:link controller="public" action="show" id="${con}">${pg.name}</g:link> </a>
         <g:if test="${con[0..1] == 'in'}">
             (<g:message code="shared.consumersList.institution" />)
         </g:if>

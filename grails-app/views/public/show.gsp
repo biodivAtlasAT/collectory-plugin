@@ -171,9 +171,8 @@
                     <g:if test="${!address?.isEmpty()}">
                       <p>
                         <cl:valueOrOtherwise value="${address?.street}">${address?.street}<br/></cl:valueOrOtherwise>
+                        <cl:valueOrOtherwise value="${address?.postcode}">${address?.postcode}</cl:valueOrOtherwise>
                         <cl:valueOrOtherwise value="${address?.city}">${address?.city}<br/></cl:valueOrOtherwise>
-                        <cl:valueOrOtherwise value="${address?.state}">${address?.state}</cl:valueOrOtherwise>
-                        <cl:valueOrOtherwise value="${address?.postcode}">${address?.postcode}<br/></cl:valueOrOtherwise>
                         <cl:valueOrOtherwise value="${address?.country}">${address?.country}<br/></cl:valueOrOtherwise>
                       </p>
                     </g:if>
