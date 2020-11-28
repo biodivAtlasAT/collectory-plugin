@@ -92,6 +92,10 @@
                     <p style="padding-bottom:8px;"><span id="numBiocacheRecords"><g:message code="public.numbrs.des01" /></span> <g:message code="public.numbrs.des02" args="[orgNameLong]"/>.</p>
                     <p><cl:recordsLink entity="${instance}"><g:message code="public.numbrs.link" /> ${instance.name}.</cl:recordsLink></p>
                 </div>
+                <!-- Record providers and resources -->
+                <g:if test="${instance.listProviders().size() > 0}">
+                    <g:render template="/shared/providersList" model="[instance: instance]"/>
+                </g:if>
 
                 <div id="recordsBreakdown" class="section vertical-charts">
                     <div id="charts"></div>
