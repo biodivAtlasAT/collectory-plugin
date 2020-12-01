@@ -24,26 +24,8 @@
           </ul>
         </g:if>
       </g:if>
-      <g:else><li><g:message code="shared.providers.li01" />!</li></g:else>
+
     </g:each>
-    <!-- for collections try their institution -->
-    <g:if test="${instance instanceof au.org.ala.collectory.Collection && instance.institution}">
-      <g:each in="${instance.institution.listProviders()}" var="prov">
-        <g:set var="pg" value="${ProviderGroup._get(prov)}"/>
-        <g:if test="${pg}">
-          <li><g:link controller="public" action="show" id="${prov}">${pg.name}</g:link>
-          <g:if test="${isProvider}">
-            (<g:message code="shared.providersList.provider" />)
-          </g:if>
-          <g:else>
-            (<g:message code="shared.providersList.resource" />)
-          </g:else>
-          - <g:message code="shared.providersList.viaTheInstituton" />
-          </li>
-        </g:if>
-        <g:else><li><g:message code="shared.providers.li01" />!</li></g:else>
-      </g:each>
-    </g:if>
   </ul>
   <div style="clear:both;"></div>
 </div>

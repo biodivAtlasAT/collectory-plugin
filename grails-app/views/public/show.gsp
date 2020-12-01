@@ -270,6 +270,12 @@
                     <g:else>
                       <p><g:message code="public.show.rt.des07" args="[orgNameLong]" />.</p>
                     </g:else>
+
+                  <!-- Record providers and resources -->
+                  <g:if test="${instance.listProviders().size() > 0}">
+                      <g:render template="/shared/providersList" model="[instance: instance]"/>
+                  </g:if>
+
                     <g:if test="${biocacheRecordsAvailable}">
                         <div style="clear:both;"></div>
                           <g:if test="${!grailsApplication.config.disableOverviewMap?.asBoolean()}">
